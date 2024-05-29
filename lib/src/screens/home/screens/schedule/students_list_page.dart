@@ -13,21 +13,35 @@ class StudentsListPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Студенты'),
       ),
-      body: ListView.builder(
-        itemCount: groupStudentDtos.length,
-        itemBuilder: (context, index) {
-          final group = groupStudentDtos[index];
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 10),
-              _buildGroupHeader(group.name),
-              SizedBox(height: 5),
-              ...group.studentInLesson
-                  .map((student) => _buildStudentTile(student)),
-            ],
-          );
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: groupStudentDtos.length,
+              itemBuilder: (context, index) {
+                final group = groupStudentDtos[index];
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
+                    _buildGroupHeader(group.name),
+                    SizedBox(height: 5),
+                    ...group.studentInLesson
+                        .map((student) => _buildStudentTile(student)),
+                  ],
+                );
+              },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // Действие для кнопки
+              print('Кнопка нажата');
+            },
+            child: Text('Подтвердить список студентов'),
+          ),
+          SizedBox(height: 40),
+        ],
       ),
     );
   }

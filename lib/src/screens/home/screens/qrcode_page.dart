@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,16 +11,16 @@ class QRCodePage extends StatefulWidget {
 }
 
 class _QRCodePageState extends State<QRCodePage> {
-  String? userId = '';
+  late String userId = '';
   late String _qrData = '';
   late Timer _timer;
 
   @override
   void initState() {
     super.initState();
+    _checkUserInfo();
     _generateQrCode();
     _startTimer();
-    _checkUserInfo();
   }
 
   @override
@@ -45,13 +46,18 @@ class _QRCodePageState extends State<QRCodePage> {
   }
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(minutes: 1), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 20), (timer) {
       _generateQrCode();
     });
   }
 
   Future<void> _checkUserInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(token!);
+    await prefs.setString('userId', decodedToken['LOCAL AUTHORITY']);
+
     String? id = prefs.getString('userId');
 
     if (id != null) {

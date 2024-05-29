@@ -12,8 +12,8 @@ class GroupStudent {
   factory GroupStudent.fromJson(Map<String, dynamic> json) {
     // Извлекаем данные из JSON и создаем экземпляр GroupStudentDto
     return GroupStudent(
-      name: json['Name'] ?? '', // Название группы
-      studentInLesson: (json['StudentInLesson'] as List<dynamic>).map((item) {
+      name: json['name'] ?? '', // Название группы
+      studentInLesson: (json['studentInLesson'] as List<dynamic>).map((item) {
         // Преобразуем список студентов в соответствующие модели данных
         return AttendanceStudentInLesson.fromJson(item);
       }).toList(),

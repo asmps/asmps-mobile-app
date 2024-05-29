@@ -17,10 +17,10 @@ class AttendanceStudentInLesson {
   factory AttendanceStudentInLesson.fromJson(Map<String, dynamic> json) {
     // Извлекаем данные из JSON и создаем экземпляр AttendanceStudentInLessonDto
     return AttendanceStudentInLesson(
-      fullName: json['FullName'] ?? '', // ФИО студента
+      fullName: json['fullName'] ?? '', // ФИО студента
       attendanceDateTime:
-          DateTime.parse(json['AttendanceDateTime']), // Дата посещения
-      isAttendance: json['IsAttendance'] ?? false, // Посещаемость
+          DateTime.parse(json['attendanceDateTime']), // Дата посещения
+      isAttendance: json['isAttendance'] ?? false, // Посещаемость
     );
   }
 }

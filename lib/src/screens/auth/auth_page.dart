@@ -22,6 +22,7 @@ class _AuthPageState extends State<AuthPage> {
 
     Map<String, dynamic> decodedToken = JwtDecoder.decode(token!);
     await prefs.setString('roles', decodedToken['role']);
+    await prefs.setString('userId', decodedToken['LOCAL AUTHORITY']);
 
     final String role = decodedToken['role'];
 

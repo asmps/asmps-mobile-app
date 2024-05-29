@@ -230,7 +230,9 @@ class _SchedulePageState extends State<SchedulePage> {
           ),
         );
       } else {
-        throw Exception('Failed to load students for lesson');
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Ошибка: ${response.body}'),
+        ));
       }
     } catch (error) {
       print('Error load list: $error');

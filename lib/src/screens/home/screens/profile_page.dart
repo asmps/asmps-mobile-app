@@ -122,7 +122,23 @@ class _ProfilePageState extends State<ProfilePage> {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             print(snapshot.error.toString());
-            return Center(child: Text('Ошибка загрузки данных'));
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Ошибка загрузки данных'),
+                  SizedBox(height: 20), // Расстояние между текстом и кнопкой
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      // Действия для выхода из аккаунта
+                      _logout(context);
+                    },
+                    icon: Icon(Icons.exit_to_app),
+                    label: Text('Выход'),
+                  ),
+                ],
+              ),
+            );
           } else {
             // Заполнение данных пользователя в контроллеры
             _nameController.text = snapshot.data!.name;
