@@ -20,13 +20,13 @@ class _AuthPageState extends State<AuthPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
 
-    Map<String, dynamic> decodedToken = JwtDecoder.decode(token!);
-    await prefs.setString('roles', decodedToken['role']);
-    await prefs.setString('userId', decodedToken['LOCAL AUTHORITY']);
-
-    final String role = decodedToken['role'];
-
     if (token != null) {
+      Map<String, dynamic> decodedToken = JwtDecoder.decode(token!);
+      await prefs.setString('roles', decodedToken['role']);
+      await prefs.setString('userId', decodedToken['LOCAL AUTHORITY']);
+
+      final String role = decodedToken['role'];
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (context) => HomePage(
